@@ -1,23 +1,27 @@
 package com.matterial.messaging.api;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * <strong>MessageContainer</strong>
+ */
 @XmlRootElement
-public class MessageContainer {
+public class MessageContainer implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    public static enum MESSAGE_TYPE {EMAIL};
-    
     private String senderApplication;
-    private String sender;
-    private String receiver;
-    
-    private MESSAGE_TYPE type;
+    private List<String> receivers;
     private String subject;
     private String message;
 
-    public MessageContainer(){}
+    public MessageContainer() {
+        // *** do nothing;
+    }
     
     public String getSenderApplication() {
         return senderApplication;
@@ -27,28 +31,15 @@ public class MessageContainer {
         this.senderApplication = senderApplication;
     }
 
-    public String getSender() {
-        return sender;
+    public List<String> getReceivers() {
+        if(this.receivers == null) {
+            this.receivers = new ArrayList<>();
+        }
+        return receivers;
     }
 
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
-
-    public String getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(String receiver) {
-        this.receiver = receiver;
-    }
-
-    public MESSAGE_TYPE getType() {
-        return type;
-    }
-
-    public void setType(MESSAGE_TYPE type) {
-        this.type = type;
+    public void setReceivers(List<String> receivers) {
+        this.receivers = receivers;
     }
 
     public String getSubject() {
@@ -69,6 +60,11 @@ public class MessageContainer {
 
     @Override
     public String toString() {
-        return "MessageContainer{" + "senderApplication=" + senderApplication + ", sender=" + sender + ", receiver=" + receiver + ", type=" + type + ", subject=" + subject + ", message=" + message + '}';
+        return "MessageContainer{" + 
+               "senderApplication=" + senderApplication + 
+               ", receivers=" + receivers + 
+               ", subject=" + subject + 
+               ", message=" + message + 
+               "}";
     }
 }
