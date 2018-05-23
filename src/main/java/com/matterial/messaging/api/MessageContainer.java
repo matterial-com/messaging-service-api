@@ -13,8 +13,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class MessageContainer implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     private String senderApplication;
+    private String from;
     private List<String> receivers;
     private String subject;
     private String message;
@@ -22,13 +23,21 @@ public class MessageContainer implements Serializable {
     public MessageContainer() {
         // *** do nothing;
     }
-    
+
     public String getSenderApplication() {
         return senderApplication;
     }
 
     public void setSenderApplication(String senderApplication) {
         this.senderApplication = senderApplication;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
     }
 
     public List<String> getReceivers() {
@@ -60,11 +69,12 @@ public class MessageContainer implements Serializable {
 
     @Override
     public String toString() {
-        return "MessageContainer{" + 
-               "senderApplication=" + senderApplication + 
-               ", receivers=" + receivers + 
-               ", subject=" + subject + 
-               ", message=" + message + 
+        return "MessageContainer{" +
+               "senderApplication=" + senderApplication +
+               ", from=" + from +
+               ", receivers=" + receivers +
+               ", subject=" + subject +
+               ", message=" + message +
                "}";
     }
 }
