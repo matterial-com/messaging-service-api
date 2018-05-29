@@ -2,7 +2,9 @@ package com.matterial.messaging.api;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -17,8 +19,12 @@ public class MessageContainer implements Serializable {
     private String senderApplication;
     private String from;
     private List<String> receivers;
+    private List<Attachment> attachments;
     private String subject;
     private String message;
+    private String templateNameSubject;
+    private String templateNameMessage;
+    private Map<String, Object> templateContextObjects;
 
     public MessageContainer() {
         // *** do nothing;
@@ -38,6 +44,17 @@ public class MessageContainer implements Serializable {
 
     public void setFrom(String from) {
         this.from = from;
+    }
+
+    public List<Attachment> getAttachments() {
+        if(this.attachments == null) {
+            this.attachments = new ArrayList<>();
+        }
+        return attachments;
+    }
+
+    public void setAttachments(List<Attachment> attachments) {
+        this.attachments = attachments;
     }
 
     public List<String> getReceivers() {
@@ -67,14 +84,45 @@ public class MessageContainer implements Serializable {
         this.message = message;
     }
 
+    public String getTemplateNameSubject() {
+        return templateNameSubject;
+    }
+
+    public void setTemplateNameSubject(String templateNameSubject) {
+        this.templateNameSubject = templateNameSubject;
+    }
+
+    public String getTemplateNameMessage() {
+        return templateNameMessage;
+    }
+
+    public void setTemplateNameMessage(String templateNameMessage) {
+        this.templateNameMessage = templateNameMessage;
+    }
+
+    public Map<String, Object> getTemplateContextObjects() {
+        if(this.templateContextObjects == null) {
+            this.templateContextObjects = new HashMap<>();
+        }
+        return this.templateContextObjects;
+    }
+
+    public void setTemplateContextObjects(Map<String, Object> templateContextObjects) {
+        this.templateContextObjects = templateContextObjects;
+    }
+
     @Override
     public String toString() {
         return "MessageContainer{" +
-               "senderApplication=" + senderApplication +
-               ", from=" + from +
-               ", receivers=" + receivers +
-               ", subject=" + subject +
-               ", message=" + message +
+               "senderApplication=" + this.getSenderApplication() +
+               ", from=" + this.getFrom() +
+               ", receivers=" + this.getReceivers() +
+               ", subject=" + this.getSubject() +
+               ", message=" + this.getMessage() +
+               ", templateNameSubject=" + this.getTemplateNameSubject() +
+               ", templateNameMessage=" + this.getTemplateNameMessage() +
+               ", templateContextObjects=" + this.getTemplateContextObjects() +
                "}";
     }
+
 }
